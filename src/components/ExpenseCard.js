@@ -9,10 +9,11 @@ class ExpenseCard extends React.Component{
 
     render(){
         return(
-            <Card>
-            <Card.Header>expense - {this.props.date}</Card.Header>
+            <Card className="mr-auto">
+            <Card.Header>expense - {this.props.date}
+
+            </Card.Header>
             <Card.Body>
-                id:{this.props.id}
                 Category:{this.props.category}
                 Amount:{this.props.amount}
                 <Card.Text>More Information: {''} {this.props.moreInformation}</Card.Text>

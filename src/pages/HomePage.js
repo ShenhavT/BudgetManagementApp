@@ -28,7 +28,6 @@ class HomePage extends React.Component{
                  })
          });
          this.setState({totalAmount:this.state.totalAmount+parseFloat(objExpense.amount)});
-          console.log(this.state.resultExpenseListCard);
     }
 
     render(){
@@ -49,10 +48,10 @@ class HomePage extends React.Component{
                  {/*---THE FORM PAGE -- */}
                 <Categories addExpense={this.addExpense} detailsExpense={this.detailsExpense}/>
                 <div className="amount-box">
-                        <Card border="danger" style={{ width: '12rem' }}>
+                        <Card border="danger">
                             <Card.Body>
                                 <Card.Title>Total Amount:</Card.Title>
-                                <Card.Text>{this.state.totalAmount}</Card.Text>
+                                <Card.Text className="text-center"><h2>{this.state.totalAmount}</h2></Card.Text>
                             </Card.Body>
                         </Card>
                 </div>

@@ -11,12 +11,12 @@ class Categories extends React.Component{
             expenseList:[],
             categoryOption:'',
             moreInformation:'',
-            amount: '',
+            amount: 0,
             chossenDate:''        }
     }
     Categories = CategoriesJson;
     cleanState=()=>{
-        this.setState({categoryOption:'', moreInformation:'',amount:'', 
+        this.setState({categoryOption:'', moreInformation:'',amount:0, 
                             chossenDate:this.state.date.toISOString().slice(0,10)});
     }
     HandelOnclick = () =>{
@@ -78,15 +78,12 @@ class Categories extends React.Component{
 
                         <Form.Label>Date</Form.Label>
                         <Form.Group>
-                        {/* <DatePicker  id="example-datepicker"/> */}
-                        {/* defaultValue={strDate}  */}
                         <Form.Control type="date" value={this.state.chossenDate}
                         onChange={(event) => {this.setState({chossenDate: event.target.value})}}/>
-                        {/* <Form.Control type="date" defaultValue="2021-01-20"/> */}
                         </Form.Group>
                     </Col>
                     <Col  xs="auto" className="my-1"> 
-                        <Button type="text" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
+                        <Button type="button" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
                     </Col>
 
                     
