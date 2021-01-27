@@ -1,0 +1,29 @@
+[
+    {
+        "id": "uu2101",
+        "category": "Car Payment",
+        "moreInformation ": "Delek",
+        "amount": "267",
+        "date": "2021-01-20"
+    },
+    {
+        "id": "uu2102",
+        "category": "Rent",
+        "amount": "3200",
+        "date": "2021-01-25"
+    },
+    {
+        "id": "uu2103",
+        "category": "Children/Toys",
+        "moreInformation ": "ball, cars",
+        "amount": "789",
+        "date": "2021-01-22"
+    },
+    {
+        "id": "uu2104",
+        "category": "Electricity",
+        "moreInformation ": "bill",
+        "amount": "1200",
+        "date": "2021-01-05"
+    }
+]

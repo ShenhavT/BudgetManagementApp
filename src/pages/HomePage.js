@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import Categories from '../components/Categories';
 import ExpenseCard from '../components/ExpenseCard';
+import expensesJson from '../data/expenses.json';
 
 
 
@@ -9,12 +10,11 @@ class HomePage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            resultExpenseListCard : [],
+            resultExpenseListCard : expensesJson,
             detailsExpense:{id:'',category:'', moreInformation:'', amount:'', date:''},
             totalAmount:0
         }
     }
-
     addExpense=(objExpense)=>{
         console.log("at addExpense");
          this.setState({
@@ -29,7 +29,14 @@ class HomePage extends React.Component{
          });
          this.setState({totalAmount:this.state.totalAmount+parseFloat(objExpense.amount)});
     }
-
+    componentDidMount(){
+        let amountFromJson = 0;
+        this.state.resultExpenseListCard.forEach(element => {
+            amountFromJson+=parseFloat(element.amount);
+        });
+        console.log(amountFromJson);
+        this.setState({totalAmount:amountFromJson});
+    }
     render(){
         // ask if better to send as a object??
         const expenseCards = this.state.resultExpenseListCard.map( (expense, index) => {
@@ -51,7 +58,7 @@ class HomePage extends React.Component{
                         <Card border="danger">
                             <Card.Body>
                                 <Card.Title>Total Amount:</Card.Title>
-                                <Card.Text className="text-center"><h2>{this.state.totalAmount}</h2></Card.Text>
+                                <Card.Text className="text-center">{this.state.totalAmount}</Card.Text>
                             </Card.Body>
                         </Card>
                 </div>

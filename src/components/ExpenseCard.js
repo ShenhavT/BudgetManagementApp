@@ -11,7 +11,7 @@ class ExpenseCard extends React.Component{
         return(
             <Card className="mr-auto">
             <Card.Header>expense - {this.props.date}
-
+            <span className="text-center">X</span>
             </Card.Header>
             <Card.Body>
                 Category:{this.props.category}
