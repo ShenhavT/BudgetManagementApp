@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import CategoriesJson from '../data/categories.json';
+import uuid from 'react-uuid'
 
 class Categories extends React.Component{
     constructor(props){
@@ -10,12 +11,13 @@ class Categories extends React.Component{
             expenseList:[],
             categoryOption:'',
             moreInformation:'',
-            amount:'',
+            amount: '',
             chossenDate:''        }
     }
     Categories = CategoriesJson;
     cleanState=()=>{
-        this.setState({categoryOption:'', moreInformation:'',amount:'', chossenDate:''});
+        this.setState({categoryOption:'', moreInformation:'',amount:'', 
+                            chossenDate:this.state.date.toISOString().slice(0,10)});
     }
     HandelOnclick = () =>{
         // console.log('show status of state');
@@ -25,7 +27,7 @@ class Categories extends React.Component{
         // console.log(this.state.chossenDate);
         // debugger;
         const newObjExpense={
-            id:0,
+            id:uuid(),
             category: this.state.categoryOption,
             moreInformation: this.state.moreInformation,
             amount:this.state.amount,
@@ -71,7 +73,7 @@ class Categories extends React.Component{
                         {/* onChange={handleChange} */}
                         
                         <Form.Label>Amount</Form.Label>
-                        <Form.Control type="text" name="amount" value={this.state.amount}
+                        <Form.Control type="number" name="amount" value={this.state.amount}
                          onChange={(event) => {this.setState({amount: event.target.value})}}/>
 
                         <Form.Label>Date</Form.Label>
