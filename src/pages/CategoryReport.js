@@ -1,5 +1,4 @@
 import React from 'react';
-import NavbarBudget from '../components/NavbarBudget';
 
 class CategoryReport extends React.Component{
     constructor(props){
