@@ -1,3 +1,4 @@
+import moment, { isMoment } from 'moment';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import Categories from '../components/Categories';
@@ -8,11 +9,21 @@ import expensesJson from '../data/expenses.json';
 
 class HomePage extends React.Component{
     constructor(props){
+
+        let allExpenses;
+        if(localStorage.getItem('localExpenses')) {
+            allExpenses = JSON.parse(localStorage.getItem('localExpenses'));
+        }
+        else{
+            allExpenses = expensesJson;
+        }
+
         super(props);
         this.state = {
-            resultExpenseListCard : expensesJson,
+            resultExpenseListCard : allExpenses,
             detailsExpense:{id:'',category:'', moreInformation:'', amount:'', date:''},
-            totalAmount:0
+            totalAmount:0,
+            toSort:false
         }
     }
     addExpense=(objExpense)=>{
@@ -28,14 +39,23 @@ class HomePage extends React.Component{
                  })
          });
          this.setState({totalAmount:this.state.totalAmount+parseFloat(objExpense.amount)});
+         //enter to local storage
+         localStorage.setItem('localExpenses', JSON.stringify(
+            this.state.resultExpenseListCard.concat(objExpense)))
+
     }
     componentDidMount(){
-        let amountFromJson = 0;
+        let amountFromJsonAndLocalStorage = 0;
         this.state.resultExpenseListCard.forEach(element => {
-            amountFromJson+=parseFloat(element.amount);
+            amountFromJsonAndLocalStorage+=parseFloat(element.amount);
         });
-        console.log(amountFromJson);
-        this.setState({totalAmount:amountFromJson});
+        console.log(amountFromJsonAndLocalStorage);
+        this.setState({totalAmount:amountFromJsonAndLocalStorage});
+    }
+    sortByDateExpence=()=>{
+        console.log('before',this.state.resultExpenseListCard)
+        const sorted = this.state.resultExpenseListCard.sort((a, b) => moment(a.date).diff(moment(b.date)) > 0 ? 1 : -1);
+        this.forceUpdate();
     }
     render(){
         // ask if better to send as a object??
@@ -53,7 +73,8 @@ class HomePage extends React.Component{
             <div>
                 this is home 
                  {/*---THE FORM PAGE -- */}
-                <Categories addExpense={this.addExpense} detailsExpense={this.detailsExpense}/>
+                <Categories addExpense={this.addExpense} detailsExpense={this.detailsExpense}
+                                                        sortByDateExpence={this.sortByDateExpence}/>
                 <div className="amount-box">
                         <Card border="danger">
                             <Card.Body>
@@ -66,8 +87,6 @@ class HomePage extends React.Component{
             </div>
 
         );}
-
-
 }
 
 

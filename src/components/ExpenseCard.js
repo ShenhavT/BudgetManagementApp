@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
@@ -10,8 +11,11 @@ class ExpenseCard extends React.Component{
     render(){
         return(
             <Card className="mr-auto">
-            <Card.Header>expense - {this.props.date}
-            <span className="text-center">X</span>
+            <Card.Header>
+                <Card.Title className="d-flex justify-content-between">
+                    <span>Expense - {moment(this.props.date).format("DD/MM/YYYY")}</span>
+                    <span className="text-center">X</span>
+                </Card.Title>
             </Card.Header>
             <Card.Body>
                 Category:{this.props.category}

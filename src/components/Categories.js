@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import CategoriesJson from '../data/categories.json';
 import uuid from 'react-uuid'
+import moment from 'moment';
 
 class Categories extends React.Component{
     constructor(props){
@@ -36,7 +37,16 @@ class Categories extends React.Component{
         this.cleanState();
         this.props.addExpense(newObjExpense);
     }
+    selectBoxOnExpense=(event)=>{
+        if (event.target.value==="date"){
+            this.sortByDate();
+        }
 
+    }
+    sortByDate =()=>{
+        // console.log("date")
+        this.props.sortByDateExpence();
+    }
     componentDidMount(){
         this.setState({ chossenDate:this.state.date.toISOString().slice(0,10)})
     }
@@ -46,7 +56,8 @@ class Categories extends React.Component{
             return(<option key={index} >
                 {category.Automobile}</option>);
         });
-        const strDate = this.state.date.toISOString().slice(0,10);
+        // const strDate = this.state.date.toISOString().slice(0,10);
+        const strDate = moment(this.state.date).format("DD/MM/YYYY");
         return(
                 <Form>
                     <h2>New Expense</h2>
@@ -57,7 +68,7 @@ class Categories extends React.Component{
                         <Form.Label className="mr-sm-2">
                              Preference
                         </Form.Label>
-                         <Form.Control as="select" className="mr-sm-2" id="inlineFormCustomSelect" custom
+                         <Form.Control as="select" className="mr-sm-2" custom
                         value={this.state.categoryOption}
                           onChange={(event) => {this.setState({categoryOption: event.target.value})
                           console.log(event.target.value)}}>                    
@@ -85,8 +96,18 @@ class Categories extends React.Component{
                     <Col  xs="auto" className="my-1"> 
                         <Button type="button" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
                     </Col>
+                    <Col>
+                    <Button type="button" onClick={()=>{this.sortByDate()}}>Sory By Date</Button>
 
-                    
+                    <Form.Control as="select" className="mr-sm-2"custom
+                                onChange={this.selectBoxOnExpense}>
+                                <option value="date">sort by Date</option>
+                                <option value="0"></option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                               
+                    </Form.Control>
+                    </Col>
                 </Form.Row>
                 </Form>
 
