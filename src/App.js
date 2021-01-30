@@ -13,6 +13,7 @@ class App extends React.Component{
   constructor(props){
     super(props);
       this.state = {  
+         expensesList:[],
         //  activeUser: null,
         activeUser:{
           "id": 1,
@@ -27,6 +28,12 @@ class App extends React.Component{
     this.setState({activeUser: null})
   }
   
+  handelExpenseList = (objList) => {
+    console.log('handelExpenseList');
+    this.setState({expensesList:objList});
+    // console.log(this.state.expensesList);
+  }
+
   render(){
     return (
     <HashRouter>
@@ -37,13 +44,13 @@ class App extends React.Component{
         <Container>
           <Switch>
             <Route exact path="/">
-             <HomePage  activeUser={this.state.activeUser}/>
+             <HomePage  activeUser={this.state.activeUser}  expensesList={this.handelExpenseList}/>
            </Route>
             <Route path='/categoryreport'>
               <CategoryReport/>
             </Route>
             <Route path='/spendingreport'>
-             <SpendingReport/>
+             <SpendingReport expensesListToPie={this.state.expensesList}/>
             </Route>
           </Switch>
         </Container>

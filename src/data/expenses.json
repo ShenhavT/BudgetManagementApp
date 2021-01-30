@@ -3,14 +3,14 @@
         "id": "uu2101",
         "category": "Car Payment",
         "moreInformation ": "Delek",
-        "amount": "267",
-        "date": "2021-01-20"
+        "amount": "269",
+        "date": "2021-01-25"
     },
     {
         "id": "uu2102",
         "category": "Rent",
         "amount": "3200",
-        "date": "2021-01-25"
+        "date": "2021-01-21"
     },
     {
         "id": "uu2103",
@@ -24,6 +24,36 @@
         "category": "Electricity",
         "moreInformation ": "bill",
         "amount": "1200",
-        "date": "2021-01-05"
+        "date": "2021-01-24"
+    },
+    {
+        "id": "uu2105",
+        "category": "Food",
+        "amount": "120",
+        "date": "2020-12-20"
+    },
+    {
+        "id": "uu2106",
+        "category": "Rent",
+        "amount": "3200",
+        "date": "2020-12-20"
+    },
+    {
+        "id": "uu2107",
+        "category": "Food",
+        "amount": "150",
+        "date": "2020-12-12"
+    },
+    {
+        "id": "uu2108",
+        "category": "Food",
+        "amount": "230",
+        "date": "2020-12-01"
+    },
+    {
+        "id": "uu2109",
+        "category": "Children/Toys",
+        "amount": "300",
+        "date": "2020-08-02"
     }
 ]

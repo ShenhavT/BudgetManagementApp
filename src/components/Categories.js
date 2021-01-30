@@ -70,8 +70,7 @@ class Categories extends React.Component{
                         </Form.Label>
                          <Form.Control as="select" className="mr-sm-2" custom
                         value={this.state.categoryOption}
-                          onChange={(event) => {this.setState({categoryOption: event.target.value})
-                          console.log(event.target.value)}}>                    
+                          onChange={(event) => {this.setState({categoryOption: event.target.value})}}>                    
                             <option value="0">Choose...</option>
                             {listOfCategories}
                         </Form.Control>

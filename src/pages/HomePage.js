@@ -1,4 +1,4 @@
-import moment, { isMoment } from 'moment';
+import moment from 'moment';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import Categories from '../components/Categories';
@@ -38,10 +38,12 @@ class HomePage extends React.Component{
                  date:objExpense.date
                  })
          });
+         //send to parent app 
+         this.props.expensesList(this.state.resultExpenseListCard);
          this.setState({totalAmount:this.state.totalAmount+parseFloat(objExpense.amount)});
          //enter to local storage
          localStorage.setItem('localExpenses', JSON.stringify(
-            this.state.resultExpenseListCard.concat(objExpense)))
+        this.state.resultExpenseListCard.concat(objExpense)))
 
     }
     componentDidMount(){
@@ -51,6 +53,8 @@ class HomePage extends React.Component{
         });
         console.log(amountFromJsonAndLocalStorage);
         this.setState({totalAmount:amountFromJsonAndLocalStorage});
+        //send to parent app 
+        this.props.expensesList(this.state.resultExpenseListCard);
     }
     sortByDateExpence=()=>{
         console.log('before',this.state.resultExpenseListCard)
