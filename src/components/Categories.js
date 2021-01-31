@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import CategoriesJson from '../data/categories.json';
 import uuid from 'react-uuid'
 import moment from 'moment';
@@ -63,7 +63,7 @@ class Categories extends React.Component{
                     <h2>New Expense</h2>
                     <h4>{strDate}</h4>
                 <Form.Row className="align-items-center">
-                    <Col xs="auto" className="my-1">
+                    <Col xs="auto" className="my-1 border p-5">
                         
                         <Form.Label className="mr-sm-2">
                              Preference
@@ -91,23 +91,22 @@ class Categories extends React.Component{
                         <Form.Control type="date" value={this.state.chossenDate}
                         onChange={(event) => {this.setState({chossenDate: event.target.value})}}/>
                         </Form.Group>
-                    </Col>
-                    <Col  xs="auto" className="my-1"> 
                         <Button type="button" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
                     </Col>
+                    <Col></Col>
                     <Col>
-                    <Button type="button" onClick={()=>{this.sortByDate()}}>Sory By Date</Button>
+                        <Button type="button" onClick={()=>{this.sortByDate()}}>Sory By Date</Button>
 
-                    <Form.Control as="select" className="mr-sm-2"custom
+                        <Form.Control as="select" className="mr-sm-2"custom
                                 onChange={this.selectBoxOnExpense}>
                                 <option value="date">sort by Date</option>
                                 <option value="0"></option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                                
-                    </Form.Control>
+                        </Form.Control>
                     </Col>
-                </Form.Row>
+                    </Form.Row>
                 </Form>
 
         );}

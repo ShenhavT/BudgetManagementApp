@@ -9,7 +9,7 @@ import expensesJson from '../data/expenses.json';
 
 class HomePage extends React.Component{
     constructor(props){
-
+        // localStorage.clear
         let allExpenses;
         if(localStorage.getItem('localExpenses')) {
             allExpenses = JSON.parse(localStorage.getItem('localExpenses'));
