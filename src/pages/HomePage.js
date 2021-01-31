@@ -3,24 +3,17 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import Categories from '../components/Categories';
 import ExpenseCard from '../components/ExpenseCard';
-import expensesJson from '../data/expenses.json';
 
 
 
 class HomePage extends React.Component{
     constructor(props){
         // localStorage.clear
-        let allExpenses;
-        if(localStorage.getItem('localExpenses')) {
-            allExpenses = JSON.parse(localStorage.getItem('localExpenses'));
-        }
-        else{
-            allExpenses = expensesJson;
-        }
+
 
         super(props);
         this.state = {
-            resultExpenseListCard : allExpenses,
+            resultExpenseListCard : this.props.expensesStorage,
             detailsExpense:{id:'',category:'', moreInformation:'', amount:'', date:''},
             totalAmount:0,
             toSort:false

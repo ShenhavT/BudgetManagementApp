@@ -8,12 +8,27 @@ import Switch from 'react-bootstrap/esm/Switch';
 import CategoryReport from './pages/CategoryReport';
 import SpendingReport from './pages/SpendingReport';
 import { Container } from 'react-bootstrap';
+import expensesJson from './data/expenses.json';
 
 class App extends React.Component{
   constructor(props){
     super(props);
-      this.state = {  
-         expensesList:[],
+
+
+    //conect to json file or to local Storage
+    let allExpenses;
+    if(localStorage.getItem('localExpenses')) {
+        allExpenses = JSON.parse(localStorage.getItem('localExpenses'));
+    }
+    else{
+        allExpenses = expensesJson;
+    }
+
+
+
+      this.state = {
+        // expensesStorage: allExpenses,
+         expensesList:allExpenses,
         //  activeUser: null,
         activeUser:{
           "id": 1,
@@ -44,7 +59,7 @@ class App extends React.Component{
         <Container>
           <Switch>
             <Route exact path="/">
-             <HomePage  activeUser={this.state.activeUser}  expensesList={this.handelExpenseList}/>
+             <HomePage  activeUser={this.state.activeUser}  expensesList={this.handelExpenseList} expensesStorage={this.state.expensesList}/>
            </Route>
             <Route path='/categoryreport'>
               <CategoryReport/>
