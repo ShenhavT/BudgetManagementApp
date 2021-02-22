@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 import Categories from '../components/Categories';
 import ExpenseCard from '../components/ExpenseCard';
 
@@ -32,11 +32,13 @@ class HomePage extends React.Component{
                  })
          });
          //send to parent app 
-         this.props.expensesList(this.state.resultExpenseListCard);
+        //  this.props.expensesList(this.state.resultExpenseListCard);
          this.setState({totalAmount:this.state.totalAmount+parseFloat(objExpense.amount)});
          //enter to local storage
-         localStorage.setItem('localExpenses', JSON.stringify(
-        this.state.resultExpenseListCard.concat(objExpense)))
+         localStorage.setItem('localExpenses', JSON.stringify(this.state.resultExpenseListCard));
+        // localStorage.setItem('localExpenses', JSON.stringify(
+        //     this.state.resultExpenseListCard.concat(objExpense)))
+        this.props.expensesList(objExpense);
 
     }
     componentDidMount(){
@@ -47,10 +49,16 @@ class HomePage extends React.Component{
         console.log(amountFromJsonAndLocalStorage);
         this.setState({totalAmount:amountFromJsonAndLocalStorage});
         //send to parent app 
-        this.props.expensesList(this.state.resultExpenseListCard);
+        // this.props.expensesList(this.state.resultExpenseListCard);
+    }
+    //from lower to higher
+    sortByAmountExpence=()=>{
+        const sorted = this.state.resultExpenseListCard.sort((a, b) => ((a.amount)-(b.amount)) > 0 ? 1 : -1);
+        this.forceUpdate();
+
     }
     sortByDateExpence=()=>{
-        console.log('before',this.state.resultExpenseListCard)
+        // console.log('before',this.state.resultExpenseListCard)
         const sorted = this.state.resultExpenseListCard.sort((a, b) => moment(a.date).diff(moment(b.date)) > 0 ? 1 : -1);
         this.forceUpdate();
     }
@@ -68,19 +76,18 @@ class HomePage extends React.Component{
 
         return(
             <div>
-                this is home 
                  {/*---THE FORM PAGE -- */}
                 <Categories addExpense={this.addExpense} detailsExpense={this.detailsExpense}
-                                                        sortByDateExpence={this.sortByDateExpence}/>
-                <div className="amount-box">
-                        <Card border="danger">
-                            <Card.Body>
-                                <Card.Title>Total Amount:</Card.Title>
-                                <Card.Text className="text-center">{this.state.totalAmount}</Card.Text>
-                            </Card.Body>
+                                                        sortByDateExpence={this.sortByDateExpence}
+                                                        sortByAmountExpence={this.sortByAmountExpence}/>
+                <div>
+                        <Card border="danger" style={{background:"#D4C6BD", width: '18rem', "marginLeft": "auto"}}>
+                                <Card.Title  className="text-center p-1">Total Amount: {this.state.totalAmount} ₪</Card.Title>
                         </Card>
                 </div>
+                
                 {expenseCards}
+            
             </div>
 
         );}

@@ -1,5 +1,6 @@
-import { Nav, Navbar } from "react-bootstrap";
+import { Image, Nav, Navbar } from "react-bootstrap";
 import React from 'react';
+import house from '../pictures/house-value.svg';
 
 class NavbarBudget extends React.Component{
     constructor(props){
@@ -12,7 +13,9 @@ class NavbarBudget extends React.Component{
         const logoutEl = (this.props.activeUser) ?  <Nav.Link onClick={this.props.handleLogout}>Logout</Nav.Link> : null;
         return(
                 <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/">Budget Managment</Navbar.Brand>
+                <Navbar.Brand href="/">
+                    <Image src={house} style= {{width:"40px"}}/>
+                    Budget Managment</Navbar.Brand>
                 
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 

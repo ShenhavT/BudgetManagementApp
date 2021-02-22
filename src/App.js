@@ -45,10 +45,33 @@ class App extends React.Component{
   
   handelExpenseList = (objList) => {
     console.log('handelExpenseList');
-    this.setState({expensesList:objList});
+    // localStorage.setItem('localExpenses', JSON.stringify(
+     
+
+             //enter to local storage
+            //  localStorage.setItem('localExpenses', JSON.stringify(this.state.expensesList.concat(objList)));
+            console.log("objList",objList);
+                    localStorage.setItem('localExpenses', JSON.stringify(
+            this.state.expensesList.concat(objList)))
+
+
+             this.setState({
+              expensesList:this.state.expensesList.concat(
+                  {
+                  id:objList.id,
+                  category:objList.category,
+                  moreInformation:objList.moreInformation,
+                  amount:objList.amount,
+                  date:objList.date
+                  })
+          });
+      
     // console.log(this.state.expensesList);
   }
 
+  getAllExpenses=()=>{
+    return this.state.expensesList;
+  }
   render(){
     return (
     <HashRouter>
@@ -62,7 +85,8 @@ class App extends React.Component{
              <HomePage  activeUser={this.state.activeUser}  expensesList={this.handelExpenseList} expensesStorage={this.state.expensesList}/>
            </Route>
             <Route path='/categoryreport'>
-              <CategoryReport/>
+            {/* expensesListAll={this.getAllExpenses} */}
+              <CategoryReport expensesListToVertical={this.state.expensesList}/> 
             </Route>
             <Route path='/spendingreport'>
              <SpendingReport expensesListToPie={this.state.expensesList}/>

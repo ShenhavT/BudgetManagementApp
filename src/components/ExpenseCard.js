@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
+import uuid from 'react-uuid';
 
 
 class ExpenseCard extends React.Component{
@@ -9,20 +10,27 @@ class ExpenseCard extends React.Component{
     }
 
     render(){
+        // console.log(this.props.id)
         return(
+            <Accordion>
             <Card className="mr-auto">
-            <Card.Header>
-                <Card.Title className="d-flex justify-content-between">
-                    <span>Expense - {moment(this.props.date).format("DD/MM/YYYY")}</span>
-                    <span className="text-center">X</span>
-                </Card.Title>
-            </Card.Header>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                        <Card.Title className="d-flex justify-content-between">
+                            <span>Expense - {moment(this.props.date).format("DD/MM/YYYY")}</span>
+                            {/* <span className="text-center">X</span> */}
+                            <span className="pr-4">{this.props.amount}₪</span>
+                        </Card.Title>    
+                    </Accordion.Toggle>
+ 
+            <Accordion.Collapse eventKey="0">
             <Card.Body>
-                Category:{this.props.category}
-                Amount:{this.props.amount}
-                <Card.Text>More Information: {''} {this.props.moreInformation}</Card.Text>
+                <Card.Text><span className="font-weight-bold">Category: </span>{this.props.category}</Card.Text>
+                <Card.Text><span className="font-weight-bold">Amount:</span> {this.props.amount}</Card.Text>
+                <Card.Text><span className="font-weight-bold">More Information: </span>{''} {this.props.moreInformation}</Card.Text>
             </Card.Body>
+            </Accordion.Collapse>
             </Card>
+            </Accordion>
 
         );}
 

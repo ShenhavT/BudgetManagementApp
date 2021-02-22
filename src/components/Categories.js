@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import CategoriesJson from '../data/categories.json';
 import uuid from 'react-uuid'
 import moment from 'moment';
+import wallet from '../pictures/wallet.jpg';
+import './categories.css';
 
 class Categories extends React.Component{
     constructor(props){
@@ -41,7 +43,13 @@ class Categories extends React.Component{
         if (event.target.value==="date"){
             this.sortByDate();
         }
+        if(event.target.value==="amount"){
+            this.sortByAmount();
+        }
 
+    }
+    sortByAmount=()=>{
+        this.props.sortByAmountExpence();
     }
     sortByDate =()=>{
         // console.log("date")
@@ -70,7 +78,7 @@ class Categories extends React.Component{
                         </Form.Label>
                          <Form.Control as="select" className="mr-sm-2" custom
                         value={this.state.categoryOption}
-                          onChange={(event) => {this.setState({categoryOption: event.target.value})}}>                    
+                          onChange={(event) => {console.log(event.target.value); this.setState({categoryOption: event.target.value})}}>                    
                             <option value="0">Choose...</option>
                             {listOfCategories}
                         </Form.Control>
@@ -91,16 +99,18 @@ class Categories extends React.Component{
                         <Form.Control type="date" value={this.state.chossenDate}
                         onChange={(event) => {this.setState({chossenDate: event.target.value})}}/>
                         </Form.Group>
-                        <Button type="button" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
+                        <Button variant="outline-danger"
+                         type="button" onClick={()=>{this.HandelOnclick()}}>Add Expense</Button>
                     </Col>
                     <Col></Col>
                     <Col>
+                        <Image src={wallet} style={{width:"300px"}} rounded />
                         <Button type="button" onClick={()=>{this.sortByDate()}}>Sory By Date</Button>
 
                         <Form.Control as="select" className="mr-sm-2"custom
                                 onChange={this.selectBoxOnExpense}>
                                 <option value="date">sort by Date</option>
-                                <option value="0"></option>
+                                <option value="amount">sort by Amout</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                                

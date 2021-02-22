@@ -15,7 +15,6 @@ class SpendingReport extends React.Component{
     categories = ()=>{
         const curentCardsList =this.props.expensesListToPie;
         const foundcategories = {};
-    
         for (let i =0; i <curentCardsList.length; i++){
             const word = curentCardsList[i].category;
             if (foundcategories[word]){
@@ -62,16 +61,10 @@ class SpendingReport extends React.Component{
              }]
         };
         this.setState({data:data});
-
-
-
-
-
     }
     dictoneryByMonths=()=>{
         const curentCardsList =this.props.expensesListToPie;
         const foundDate = {};
-        const foundcategories = {};
         // console.log(curentCardsList);
         for (let i =0; i <curentCardsList.length; i++){
             const date = moment(curentCardsList[i].date).format("MM-YYYY");
@@ -81,7 +74,7 @@ class SpendingReport extends React.Component{
                     foundDate[date][category]=foundDate[date][category]+parseFloat(curentCardsList[i].amount);
                 }
                 else{
-                    foundDate[date][category] = curentCardsList[i].amount;
+                    foundDate[date][category] = parseFloat(curentCardsList[i].amount);
                 }
             }
             else{
@@ -96,8 +89,15 @@ class SpendingReport extends React.Component{
     componentDidMount(){
     //   //  const categories = this.categories();  
         // this.handekSelectBox();
-        const colorScheme = this.colorChart();
 
+        // const allExpenses =this.props.expensesListAll();
+        // this.setState()
+        // console.log('all',allExpenses)
+
+
+
+        const colorScheme = this.colorChart();
+        // console.log("before",this.props.expensesListToPie)
         const categories = this.categories();  
         
         const data = {
@@ -116,11 +116,6 @@ class SpendingReport extends React.Component{
                 {key}</option>);
         });
 
-        // console.log(this.props.expensesListToPie) 
-
-            // //const b= Object.keys(object1).map(key =>{
-            //     return (object1[key])
-            // }) 
 
         return(
                 <Row>
