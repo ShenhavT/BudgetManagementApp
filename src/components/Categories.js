@@ -10,13 +10,17 @@ class Categories extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            validationCategoryShow :false,
             date: new Date(),
             expenseList:[],
             categoryOption:'',
             moreInformation:'',
             amount: 0,
-            chossenDate:''        }
+            chossenDate:''
+        }
+        let validationCategory = <Form.Label>!!</Form.Label>;
     }
+    
     Categories = CategoriesJson;
     cleanState=()=>{
         this.setState({categoryOption:'', moreInformation:'',amount:0, 
@@ -29,6 +33,11 @@ class Categories extends React.Component{
         // console.log(this.state.amount);
         // console.log(this.state.chossenDate);
         // debugger;
+        if  (this.state.categoryOption==="0" || this.state.categoryOption===''){
+            console.log("Please choose category")
+             this.setState({validationCategoryShow:true}); 
+            return;
+        }
         const newObjExpense={
             id:uuid(),
             category: this.state.categoryOption,
@@ -46,13 +55,11 @@ class Categories extends React.Component{
         if(event.target.value==="amount"){
             this.sortByAmount();
         }
-
     }
     sortByAmount=()=>{
         this.props.sortByAmountExpence();
     }
     sortByDate =()=>{
-        // console.log("date")
         this.props.sortByDateExpence();
     }
     componentDidMount(){
@@ -64,21 +71,23 @@ class Categories extends React.Component{
             return(<option key={index} >
                 {category.Automobile}</option>);
         });
-        // const strDate = this.state.date.toISOString().slice(0,10);
         const strDate = moment(this.state.date).format("DD/MM/YYYY");
+        // const validationCategory = <Form.Label style={{color:"red"}}>please cooshe category</Form.Label>
         return(
                 <Form>
                     <h2>New Expense</h2>
                     <h4>{strDate}</h4>
                 <Form.Row className="align-items-center">
-                    <Col xs="auto" className="my-1 border p-5">
+                    <Col className="my-1 border p-5">
                         
                         <Form.Label className="mr-sm-2">
                              Preference
                         </Form.Label>
+                        {this.state.validationCategoryShow?<Form.Label style={{color:"red"}}>please cooshe category</Form.Label>:null}
                          <Form.Control as="select" className="mr-sm-2" custom
                         value={this.state.categoryOption}
-                          onChange={(event) => {console.log(event.target.value); this.setState({categoryOption: event.target.value})}}>                    
+                          onChange={(event) => {console.log(event.target.value); 
+                                                this.setState({categoryOption: event.target.value, validationCategoryShow:false})}}>                    
                             <option value="0">Choose...</option>
                             {listOfCategories}
                         </Form.Control>

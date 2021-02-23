@@ -14,7 +14,7 @@ class ExpenseCard extends React.Component{
         return(
             <Accordion>
             <Card className="mr-auto">
-                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                    <Accordion.Toggle as={Card.Header} eventKey={this.props.id}>
                         <Card.Title className="d-flex justify-content-between">
                             <span>Expense - {moment(this.props.date).format("DD/MM/YYYY")}</span>
                             {/* <span className="text-center">X</span> */}
@@ -22,7 +22,7 @@ class ExpenseCard extends React.Component{
                         </Card.Title>    
                     </Accordion.Toggle>
  
-            <Accordion.Collapse eventKey="0">
+            <Accordion.Collapse eventKey={this.props.id}>
             <Card.Body>
                 <Card.Text><span className="font-weight-bold">Category: </span>{this.props.category}</Card.Text>
                 <Card.Text><span className="font-weight-bold">Amount:</span> {this.props.amount}</Card.Text>

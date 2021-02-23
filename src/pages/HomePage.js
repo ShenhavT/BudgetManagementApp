@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import { Accordion, Card } from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 import Categories from '../components/Categories';
 import ExpenseCard from '../components/ExpenseCard';
 
