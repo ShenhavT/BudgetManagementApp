@@ -18,7 +18,6 @@ class Categories extends React.Component{
             amount: 0,
             chossenDate:''
         }
-        let validationCategory = <Form.Label>!!</Form.Label>;
     }
     
     Categories = CategoriesJson;

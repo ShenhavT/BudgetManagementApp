@@ -82,7 +82,7 @@ class App extends React.Component{
         <Container>
           <Switch>
             <Route exact path="/">
-             <HomePage  activeUser={this.state.activeUser}  expensesList={this.handelExpenseList} expensesStorage={this.state.expensesList}/>
+             <HomePage  activeUser={this.state.activeUser}  handelexpensesList={this.handelExpenseList} expensesList={this.state.expensesList}/>
            </Route>
             <Route path='/categoryreport'>
             {/* expensesListAll={this.getAllExpenses} */}
